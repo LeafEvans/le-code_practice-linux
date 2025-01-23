@@ -1,0 +1,11 @@
+# Xmake config and cache
+.xmake/
+
+# Compiled files
+build/
+
+# VS Code settings
+.vscode/
+
+# macOS folder settings
+.DS_Store
