@@ -2,7 +2,8 @@
 .xmake/
 build/
 
-# MacOS Cache
+# MacOS cache files
 .DS_Store
 
-
+# VSCode settings and cache
+.vscode/
