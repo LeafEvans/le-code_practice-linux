@@ -2,23 +2,178 @@
 #include <cstring>
 #include <ctime>
 
-#include <iostream>
-#include <utility>
+int main() {
+  const int i = 100;
+  auto i2 = 100;
+  auto& ri = i;
+  return 0;
+}
 
+#if false
+int main() {
+  // i 与 i2 在内存上相邻，从内存角度来看没有区别
+  int i = 100;
+  const int i2 = 10;
+  // 下面为真正的常量
+  100, "adca";
+  return 0;
+}
+#endif
+
+#if false
+// 节点类型
+struct Node {
+  Node(int data = 0) : data(data), next(nullptr) {}
+
+  int data;
+  Node* next;
+};
+
+// 单向链表
+class Clink {
+ public:
+  Clink() {
+    head_ = new Node();
+    tail_ = head_;
+  }
+
+  ~Clink() {
+    // 节点的释放
+    Node* curr_node = head_;
+
+    while (curr_node != nullptr) {
+      Node* temp = curr_node;
+      curr_node = curr_node->next;
+      delete temp;
+    }
+
+    head_ = nullptr;
+  }
+
+  // 链表尾插法
+  void InsertTail(int val) {
+    Node* node = new Node(val);
+    tail_->next = node;
+    tail_ = node;
+  }
+
+  // 链表头插法
+  void InsertHead(int val) {
+    Node* node = new Node(val);
+    node->next = head_->next;
+    head_->next = node;
+    if (tail_ == head_) {
+      tail_ = node;
+    }
+  }
+
+  // 链表节点的删除
+  void Remove(int val) {
+    Node* prev_node = head_;
+    Node* curr_node = head_->next;
+
+    // 遍历链表，查找值为 val 的节点
+    while (curr_node != nullptr && curr_node->data != val) {
+      prev_node = curr_node;
+      curr_node = curr_node->next;
+    }
+
+    // 如果找到目标节点
+    if (curr_node != nullptr) {
+      prev_node->next = curr_node->next;
+
+      // 如果删除的是尾节点，更新 tail_
+      if (curr_node == tail_) {
+        tail_ = prev_node;
+      }
+
+      delete curr_node;  // 释放节点内存
+    }
+  }
+
+  // 删除所有节点
+  void RemoveAll(int val) {
+    Node* prev_node = head_;
+    Node* curr_node = head_->next;
+
+    // 遍历整个链表
+    while (curr_node != nullptr) {
+      if (curr_node->data == val) {
+        // 找到匹配的节点，删除它
+        prev_node->next = curr_node->next;  // 跳过当前节点
+
+        // 如果删除的是尾节点，更新 tail_
+        if (curr_node == tail_) {
+          tail_ = prev_node;
+        }
+
+        Node* temp = curr_node;       // 保存当前节点以便释放内存
+        curr_node = curr_node->next;  // 移动到下一个节点
+        delete temp;                  // 释放内存
+      } else {
+        prev_node = curr_node;  // 没有匹配，继续遍历
+        curr_node = curr_node->next;
+      }
+    }
+  }
+
+  bool Find(int val) {
+    Node* curr_node = head_->next;
+    while (curr_node != nullptr) {
+      if (curr_node->data == val) {
+        return true;
+      }
+      curr_node = curr_node->next;
+    }
+    return false;
+  }
+
+  // 打印链表
+  void Show() {
+    Node* curr_node = head_->next;
+    while (curr_node != nullptr) {
+      std::cout << curr_node->data << ' ';
+      curr_node = curr_node->next;
+    }
+    std::cout << '\n';
+  }
+
+ private:
+  Node* head_;
+  Node* tail_;
+};
+
+int main() {
+  Clink link;
+  srand(time(NULL));
+  for (int i = 0; i < 10; ++i) {
+    int val = rand() % 100;
+    link.InsertHead(val);
+    std::cout << val << ' ';
+  }
+  std::cout << '\n';
+  link.InsertTail(200);
+  link.Show();
+  std::cout << link.Find(200) << '\n';
+  return 0;
+}
+#endif
+
+#if false
 // 整形数组，将偶数调整到数组的左侧，奇数调整到数组的右侧
 void AdjustArray(int arr[], int length) {
   int left = 0, right = length - 1;
   while (left < right) {
-    if (left < right && (arr[left] & 1) == 0) {
+
+    while (left < right && (arr[left] & 1) == 0) {
       ++left;
     }
 
-    if (left < right && (arr[left] & 1) == 1) {
+    while (left < right && (arr[right] & 1) == 1) {
       --right;
     }
-
     if (left < right) {
-      std::swap(arr[left++], arr[right++]);
+      std::swap(arr[left++], arr[right--]);
     }
   }
 }
@@ -39,6 +194,7 @@ int main() {
   std::cout << '\n';
   return 0;
 }
+#endif
 
 #if false
 // 逆序字符串
