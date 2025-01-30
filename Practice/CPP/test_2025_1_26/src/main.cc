@@ -2,12 +2,14 @@
 #include <cstring>
 #include <ctime>
 
+#if false
 int main() {
   const int i = 100;
   auto i2 = 100;
   auto& ri = i;
   return 0;
 }
+#endif
 
 #if false
 int main() {
@@ -324,6 +326,49 @@ int main() {
     arr.Erase(pos);
   }
   arr.Show();
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+// Shell排序实现
+void ShellSort(int arr[], int length) {
+  // 初始增量为长度的一半，每次减半直到为1
+  for (int gap = length / 2; gap > 0; gap /= 2) {
+    // 对每个子序列进行插入排序
+    for (int i = gap; i < length; ++i) {
+      int temp = arr[i];
+      int j = i;
+
+      // 在子序列中进行插入排序
+      while (j >= gap && arr[j - gap] > temp) {
+        arr[j] = arr[j - gap];
+        j -= gap;
+      }
+      arr[j] = temp;
+    }
+  }
+}
+
+int main() {
+  int arr[10] = {0};
+  srand(time(nullptr));
+  // 生成随机数组
+  for (int i = 0; i < 10; ++i) {
+    arr[i] = rand() % 100;
+    std::cout << arr[i] << ' ';
+  }
+  std::cout << '\n';
+
+  // 执行Shell排序
+  ShellSort(arr, 10);
+
+  // 打印排序后的数组
+  for (int i = 0; i < 10; ++i) {
+    std::cout << arr[i] << ' ';
+  }
+  std::cout << '\n';
   return 0;
 }
 #endif
