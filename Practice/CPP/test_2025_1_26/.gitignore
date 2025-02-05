@@ -5,5 +5,5 @@ build/
 # MacOS cache files
 .DS_Store
 
-# VSCode settings and cache
-.vscode/
+# VSCode cache
+.vscode/.cache
