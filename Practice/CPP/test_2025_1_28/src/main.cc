@@ -1,4 +1,3 @@
-#include <iterator>
 #if false
 int main(int argc, char** argv) {
   auto i = 100;  // 定义一个变量 i，类型由编译器自动推导为 int
@@ -1485,3 +1484,295 @@ int main() {
   return 0;
 }
 #endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> src{1, 2, 3, 4, 5};
+  std::vector<int> dest(3);
+
+  std::copy_n(std::execution::par, src.begin(), 3, dest.begin());
+
+  for (const auto elem : dest) {
+    std::cout << elem << ' ';
+  }
+  std::cout << '\n';
+
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 2, 2, 5};
+  int count = std::count(vec.begin(), vec.end(), 2);
+  std::cout << count << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 2, 2, 5};
+  int count =
+      std::count_if(vec.begin(), vec.end(), [](int x) { return x > 3; });
+  std::cout << count << std::endl;
+  return 0;      
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec1{1, 2, 3, 4};
+  std::vector<int> vec2{1, 2, 3, 4};
+  bool result = std::equal(vec1.cbegin(), vec1.cend(), vec2.cbegin());
+  std::cout << "The two vectors are equal: " << result << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <utility>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 2, 3, 3, 3, 4, 5};
+  auto result =
+      std::equal_range(vec.begin(), vec.end(), 3, std::greater<int>());
+  std::cout << std::distance(vec.begin(), result.first) << ' '
+            << std::distance(vec.begin(), result.second) << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec(10);
+  std::fill(vec.begin(), vec.end(), 5);
+  for (const auto elem : vec) {
+    std::cout << elem << ' ';
+  }
+  std::cout << '\n';
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec(10);
+  auto end = std::fill_n(std::execution::par, vec.begin() + 2, 5, 42);
+  for (const auto elem : vec) {
+    std::cout << elem << ' ';
+  }
+  std::cout << "\nEnd iterator: " << *end << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6};
+  auto it = std::find(vec.begin(), vec.end(), 3);
+  if (it != vec.end()) {
+    std::cout << "Found value: " << *it
+              << " at position: " << std::distance(vec.begin(), it)
+              << std::endl;
+  } else {
+    std::cout << "Value not found." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec1{1, 2, 3, 4, 2, 3, 4};
+  std::vector<int> vec2{2, 3, 4};
+  auto it = std::find_end(std::execution::par, vec1.begin(), vec1.end(),
+                          vec2.cbegin(), vec2.cend());
+  if (it != vec1.end()) {
+    std::cout << "Found subsequence at position: "
+              << std::distance(vec1.begin(), it) << std::endl;
+  } else {
+    std::cout << "Subsequence not found." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec1{1, 2, 3, 4, 5};
+  std::vector<int> vec2{3, 4, 6};
+  auto it = std::find_first_of(std::execution::par, vec1.begin(), vec1.end(),
+                               vec2.begin(), vec2.end());
+  if (it != vec1.end()) {
+    std::cout << "Found element: " << *it
+              << " at position: " << std::distance(vec1.begin(), it)
+              << std::endl;
+  } else {
+    std::cout << "Element not found." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6};
+  auto it = std::find_if(std::execution::par, vec.cbegin(), vec.cend(),
+                         [](int x) { return x > 3; });
+  if (it != vec.end()) {
+    std::cout << "Found element: " << *it
+              << " at position: " << std::distance(vec.cbegin(), it)
+              << std::endl;
+  } else {
+    std::cout << "No element found." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> data{1, 2, 3, 4, 5, 6};
+  auto it = std::find_if_not(std::execution::par, data.begin(), data.end(),
+                             [](int x) -> bool { return x % 2 == 0; });
+  if (it != data.end()) {
+    std::cout << "Found the first odd element: " << *it << std::endl;
+  } else {
+    std::cout << "No odd element found." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6};
+  for (const auto val : vec) {
+    std::cout << val << ' ';
+  }
+  std::cout << '\n';
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec(10);
+  std::generate(std::execution::par, vec.begin(), vec.end(),
+                []() { return rand() % 100; });
+  for (const auto val : vec) {
+    std::cout << val << ' ';
+  }
+  std::cout << '\n';
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v(10);
+  std::generate_n(v.begin(), 5, []() -> int { return rand() % 100; });
+  std::for_each_n(v.cbegin(), 5, [](int x) -> void { std::cout << x << ' '; });
+  std::cout << '\n';
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v1{5, 4, 3, 2, 1};
+  std::vector<int> v2{4, 3, 2};
+  bool result = std::includes(v1.cbegin(), v1.cend(), v2.cbegin(), v2.cend(),
+                              std::greater<int>());
+  std::cout << "Does v1 include v2? " << (result ? "Yes" : "No") << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v = {1, 3, 5, 7, 2, 4, 6, 8};
+  auto middle = v.begin() + 4;
+  std::inplace_merge(std::execution::par, v.begin(), middle, v.end());
+  std::for_each(v.cbegin(), v.cend(),
+                [](int x) -> void { std::cout << x << ' '; });
+  std::cout << '\n';
+  return 0;
+}
+#endif
+
