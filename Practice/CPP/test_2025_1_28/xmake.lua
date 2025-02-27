@@ -1,9 +1,12 @@
 add_rules("mode.debug", "mode.release")
 add_requires("boost", {configs = {all = true}})
+add_requires("tbb")
+
 target("test_2025_1_28")
     set_kind("binary")
     add_files("src/*.cc")
     add_packages("boost")
+    add_packages("tbb")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

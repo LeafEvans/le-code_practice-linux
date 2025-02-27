@@ -1,3 +1,4 @@
+#include <iterator>
 #if false
 int main(int argc, char** argv) {
   auto i = 100;  // 定义一个变量 i，类型由编译器自动推导为 int
@@ -877,6 +878,7 @@ int main() {
 }
 #endif
 
+#if false
 #include <iostream>
 #include <vector>
 
@@ -885,5 +887,599 @@ int main() {
   std::cout << vec.size() << std::endl;
   vec.resize(10);
   std::cout << vec.size() << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+
+int main() {
+  []() -> void {
+    std::cout << "Hello World!" << std::endl;
+  }();
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+
+class Spear {
+ public:
+  Spear() { std::cout << "Spear()" << std::endl; }
+  virtual ~Spear() { std::cout << "~Spear()" << std::endl; }
+  virtual void OpenFire() const { std::cout << "Spear::OpenFire" << std::endl; }
+};
+
+class FireSpear : public Spear {
+ public:
+  FireSpear() { std::cout << "FireSpear()" << std::endl; }
+  virtual ~FireSpear() { std::cout << "~FireSpear()" << std::endl; }
+  virtual void OpenFire() const override {
+    std::cout << "FireSpear::OpenFire" << std::endl;
+  }
+};
+
+void OpenFire(const Spear* spear_ptr) {
+  spear_ptr->OpenFire();
+  delete spear_ptr;
+}
+
+int main() {
+  Spear* spear_ptr = new FireSpear();
+  std::string type_name = typeid(*spear_ptr).name();
+  if (type_name == "class FireSpear" || type_name == "9FireSpear") {
+    FireSpear* fire_spear_ptr = dynamic_cast<FireSpear*>(spear_ptr);
+    if (fire_spear_ptr) {
+      std::cout << "Success!" << std::endl;
+    }
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <cstring>
+#include <iostream>
+
+class Test {
+ public:
+  Test() = default;
+
+  Test(const Test& test) {
+    if (test.str_) {
+      if (test.str_) {
+        str_ = new char[strlen(test.str_) + 1];
+        strcpy(str_, test.str_);
+      } else {
+        str_ = nullptr;
+      }
+    }
+  }
+
+  Test(Test&& test) {
+    if (test.str_) {
+      str_ = test.str_;
+      test.str_ = nullptr;
+    } else {
+      str_ = nullptr;
+    }
+  }
+
+  Test& operator=(const Test& test) {
+    if (this != &test) {
+      delete[] str_;
+      str_ = nullptr;
+    }
+  }
+
+ private:
+  char* str_ = nullptr;
+};
+#endif
+
+#if false
+#include <iostream>
+#include <memory>
+
+int main() {
+  std::shared_ptr<int> ptr1 = std::make_shared<int>(100);
+  std::shared_ptr<int> ptr2(ptr1);
+  std::cout << ptr1.use_count() << '\n';
+  std::cout << ptr1.unique() << '\n';
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <memory>
+
+int main() {
+  std::shared_ptr<int> ptr1 = std::make_shared<int>(99);
+  std::shared_ptr<int> ptr2 = std::make_shared<int>(100);
+  std::cout << *ptr1 << ' ' << *ptr2 << '\n';
+  ptr1.swap(ptr2);
+  std::cout << *ptr1 << ' ' << *ptr2 << '\n';
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <memory>
+
+int main() {
+  std::shared_ptr<int> ptr1(new int[100]());
+  std::cout << ptr1.get()[10] << '\n';
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <memory>
+
+class B;
+
+class A {
+ public:
+  std::shared_ptr<B> ptrb_;
+};
+
+class B {
+ public:
+  std::weak_ptr<A> ptra_;
+};
+
+int main() {
+  std::shared_ptr<A> ptra = std::make_shared<A>();
+  std::shared_ptr<B> ptrb = std::make_shared<B>();
+  std::unique_ptr<int> ptr1 = std::make_unique<int>(100);
+  std::cout << *ptr1 << '\n';
+  ptra->ptrb_ = ptrb;
+  ptrb->ptra_ = ptra;
+  return 0;
+}
+#endif
+
+#if false
+#include <vector>
+
+int main() {
+  std::initializer_list<int> vec_init{1, 2, 3, 4, 5};
+  std::vector<int> vec{1, 2, 3, 4, 5};
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec1{1, 2, 3, 4, 5};
+  std::vector<int> vec2(vec1.begin() + 1, vec1.end() - 2);
+  std::vector<int> vec3(10, 3);
+  vec1.push_back(10);
+  vec1.insert(vec1.begin(), vec2.begin() + 2, vec2.end());
+  vec1.erase(vec1.begin() + 2, vec1.end());
+  std::cout << vec1.empty() << std::endl;
+  std::cout << vec1.capacity() << std::endl;
+  std::cout << vec1.max_size() << std::endl;
+  vec1.resize(100, 1);
+  std::cout << vec1.size() << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <deque>
+#include <iostream>
+
+int main() {
+  std::deque<int> deq{1, 2, 3, 4, 5};
+  deq.push_front(0);
+  std::cout << deq.at(1) << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <list>
+
+int main() {
+  std::list<int> list{1, 2, 3, 4, 5};
+  list.push_back(1);
+  return 0;
+}
+#endif
+
+#if false
+#include <forward_list>
+
+int main() {
+  std::forward_list<int> flist{1, 2, 3, 4, 5};
+  auto iter = flist.begin();
+
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <string>
+
+int main() {
+  std::string str("Hello, world!");
+  std::cout << str.c_str() << std::endl;
+  std::string str2 = "Hello, Alice!";
+  str.copy(str2.data(), 5, 7);
+  std::cout << str2 << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <set>
+
+int main() {
+  std::set<int> set{13, 2, 4, 4, 4, 20};
+  set.insert(6);
+  for (auto elem : set) {
+    std::cout << elem << ' ';
+  }
+  std::cout << '\n';
+  std::multiset<int> multiset{13, 2, 4, 4, 4, 20};
+  multiset.insert(6);
+  for (auto elem : multiset) {
+    std::cout << elem << ' ';
+  }
+  std::cout << '\n';
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <map>
+#include <string>
+
+int main() {
+  std::map<int, std::string> int_string_map;
+  int_string_map.insert(std::pair<int, std::string>(10, "Alice"));
+  int_string_map.insert(std::pair<int, std::string>(20, "Bob"));
+  int_string_map.insert(std::pair<int, std::string>(30, "Cindy"));
+  int_string_map.insert(std::pair<int, std::string>(40, "David"));
+  int_string_map.insert(std::pair<int, std::string>(50, "Eva"));
+  for (auto iter = int_string_map.begin(); iter != int_string_map.end();
+       ++iter) {
+    std::cout << iter->first << ' ' << iter->second << '\n';
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <string>
+#include <unordered_map>
+
+int main() {
+  std::unordered_map<int, std::string> int_string_map;
+  int_string_map.insert(std::pair<int, std::string>(10, "Alice"));
+  int_string_map.insert(std::pair<int, std::string>(20, "Bob"));
+  int_string_map.insert(std::pair<int, std::string>(30, "Cindy"));
+  for (auto elem : int_string_map) {
+    std::cout << elem.first << ' ' << elem.second << '\n';
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5};
+  auto iter = std::adjacent_find(vec.cbegin(), vec.cend());
+  if (iter == vec.cend()) {
+    std::cout << "Container don't have adjacent elements." << std::endl;
+  } else {
+    std::cout << std::distance(vec.cbegin(), iter) << std::endl;
+  }
+  auto iter2 =
+      std::adjacent_find(vec.cbegin(), vec.cend(),
+                         [](int a, int b) -> bool { return a >= 3 && b >= 3; });
+  if (iter2 == vec.cend()) {
+    std::cout << "Container don't have adjacent elements." << std::endl;
+  } else {
+    std::cout << std::distance(vec.cbegin(), iter2) << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6};
+  std::sort(vec.begin(), vec.end());
+  std::cout << std::binary_search(vec.cbegin(), vec.cend(), 3) << std::endl;
+  std::sort(vec.begin(), vec.end(), std::greater<int>());
+  // 这里使用的 std::greater<int>() 来进行比较，必须与 std::sort() 时的比较器一致
+  std::cout << std::binary_search(vec.cbegin(), vec.cend(), 4,
+                                  std::greater<int>())
+            << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6};
+  auto count = std::count(vec.cbegin(), vec.cend(), 3);
+  std::cout << count << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6};
+  auto count = std::count_if(vec.cbegin(), vec.cend(),
+                             [](int x) -> bool { return x % 2 == 0; });
+  std::cout << count << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 2, 3, 3, 3, 4, 5, 5, 5, 5, 6};
+  int target = 3;
+  auto range = std::equal_range(vec.begin(), vec.end(), target);
+  std::cout << std::distance(vec.begin(), range.first) << ' '
+            << std::distance(vec.begin(), range.second) << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 2, 3, 4, 5};
+  std::vector<int> sub{2, 3};
+  auto result = std::find_end(vec.begin(), vec.end(), sub.begin(), sub.end());
+  std::cout << std::distance(vec.begin(), result) << '\n';
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  std::vector<int> sub{7, 8, 10};
+
+  auto result =
+      std::find_first_of(vec.begin(), vec.end(), sub.begin(), sub.end());
+
+  if (result == vec.end()) {
+    std::cout << "No element in vec is equal to any element in sub.\n";
+  } else {
+    std::cout
+        << "The first element in vec that is equal to an element in sub is "
+        << *result << '\n';
+  }
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v{1, 2, 3, 3, 4, 5};
+  auto it = std::adjacent_find(v.begin(), v.end());
+  if (it != v.end()) {
+    std::cout << "Found adjacent duplicates: " << *it << std::endl;
+  } else {
+    std::cout << "No adjacent duplicates found." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v{1, 2, 3, 4, 5, 6};
+  auto it = std::adjacent_find(std::execution::par, v.begin(), v.end(),
+                               [](int a, int b) { return a + 1 == b; });
+  if (it != v.end()) {
+    std::cout << "Found adjacent elements satisfying the condition: " << *it
+              << " and " << *(it + 1) << std::endl;
+  } else {
+    std::cout << "No adjacent elements satisfying the condition found."
+              << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v{3, 4, 6, 8, 10};
+  bool result = std::all_of(std::execution::par_unseq, v.cbegin(), v.cend(),
+                            [](int x) -> bool { return x % 2 != 0; });
+  if (result) {
+    std::cout << "All elements are even." << std::endl;
+  } else {
+    std::cout << "Not all elements are even." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v{9, 8, 7, 6, 5, 4, 3, 2, 1};
+  bool found = std::binary_search(v.begin(), v.end(), 5, std::greater<int>());
+  if (found) {
+    std::cout << "Value 5 is found in the range.\n";
+  } else {
+    std::cout << "Value 5 is not found in the range.\n";
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+
+int main() {
+  int value = 10;
+  int lower = 5;
+  int upper = 20;
+  int clamped_value = std::clamp(value, lower, upper);
+  std::cout << "Clamped value: " << clamped_value << std::endl;
+  value = 3;
+  clamped_value = std::clamp(value, lower, upper);
+  std::cout << "Clamped value: " << clamped_value << std::endl;
+  value = 25;
+  clamped_value = std::clamp(value, lower, upper);
+  std::cout << "Clamped value: " << clamped_value << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+
+int main() {
+  int value = 10;
+  int lower = 5;
+  int upper = 20;
+
+  auto greater_than = [](int a, int b) {
+    return a > b;
+  };
+
+  int clamped_value = std::clamp(value, lower, upper, greater_than);
+  std::cout << "Clamped value: " << clamped_value << std::endl;
+
+  value = 3;
+  clamped_value = std::clamp(value, lower, upper, greater_than);
+  std::cout << "Clamped value: " << clamped_value << std::endl;
+
+  value = 25;
+  clamped_value = std::clamp(value, lower, upper, greater_than);
+  std::cout << "Clamped value: " << clamped_value << std::endl;
+
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> src{1, 2, 3, 4, 5};
+  std::vector<int> dest(5);
+  std::copy(std::execution::par, src.begin(), src.end(), dest.begin());
+  for (const auto elem : dest) {
+    std::cout << elem << ' ';
+  }
+  std::cout << '\n';
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector data{1, 2, 3, 4, 5};
+  std::copy_backward(data.begin(), data.begin() + 4, data.begin() + 6);
+  for (const auto elem : data) {
+    std::cout << elem << ' ';
+  }
+  std::cout << '\n';
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> src{1, 2, 3, 4, 5, 6};
+  std::vector<int> dest;
+  std::copy_if(src.begin(), src.end(), std::back_inserter(dest),
+               [](int x) -> bool { return x % 2 == 0; });
+  for (const auto val : dest) {
+    std::cout << val << ' ';
+  }
+  return 0;
+}
+#endif
+
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6};
+  std::vector<int> dest(3);
   return 0;
 }
