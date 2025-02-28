@@ -1776,3 +1776,355 @@ int main() {
 }
 #endif
 
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v{10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+  std::sort(std::execution::par, v.begin(), v.end());
+  bool result =
+      std::is_heap(std::execution::par, v.begin(), v.end(), std::greater{});
+  std::cout << "Is v a heap? " << (result ? "Yes" : "No") << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v{10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+  auto it = std::is_heap_until(std::execution::par, v.cbegin(), v.cend());
+  if (it == v.end()) {
+    std::cout << "The entire range is a heap." << std::endl;
+  } else {
+    std::cout << "The first element that breaks the heap property is: " << *it
+              << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v{1, 3, 5, 7, 2, 4, 6, 8};
+  bool result = std::is_partitioned(v.cbegin(), v.cend(),
+                                    [](int x) -> bool { return x % 2 != 0; });
+  std::cout << "Is v partitioned? " << (result ? "Yes" : "No") << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v1{1, 2, 3, 4, 5};
+  std::vector<int> v2{5, 4, 3, 2, 1};
+  bool result =
+      std::is_permutation(v1.begin(), v1.end(), v2.begin(), std::equal_to{});
+  std::cout << "Is v1 a permutation of v2? " << (result ? "Yes" : "No")
+            << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v{1, 2, 3, 4, 5};
+  bool result = std::is_sorted(v.cbegin(), v.cend());
+  std::cout << "Is v sorted? " << (result ? "Yes" : "No") << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v = {1, 2, 3, 4, 5};
+
+  std::iter_swap(v.begin(), v.begin() + 2);
+
+  for (const auto x : v) {
+    std::cout << x << " ";
+  }
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v1{1, 2, 3};
+  std::vector<int> v2{1, 2, 4};
+  bool result = std::lexicographical_compare(
+      v1.cbegin(), v1.cend(), v2.cbegin(), v2.cend(), std::greater{});
+  std::cout << "Is v1 less than v2? " << (result ? "Yes" : "No") << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec = {1, 2, 4, 6, 8, 10};
+  std::sort(vec.begin(), vec.end(), std::greater{});
+  const int val = 5;
+
+  auto it = std::lower_bound(vec.begin(), vec.end(), val, std::greater{});
+
+  if (it != vec.end()) {
+    std::cout << "First element not greater than " << val << " is: " << *it
+              << std::endl;
+  } else {
+    std::cout << "All elements are greater than " << val << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 3, 5, 7, 9, 2, 4, 6, 8};
+  std::make_heap(vec.begin(), vec.end(), std::greater{});
+  std::cout << "Heap: ";
+  for (const auto val : vec) {
+    std::cout << val << ' ';
+  }
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+
+int main() {
+  int a = 3, b = 5;
+  const auto& max_val = std::max(a, b);
+  std::cout << "Max value: " << max_val << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+
+int main() {
+  const auto& max_val = std::max({1, 3, 5, 2, 4});
+  std::cout << "Max value: " << max_val << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{3, 1, 4, 1, 5, 9, 2, 6, 5, 3};
+  auto max_it = std::max_element(vec.begin(), vec.end());
+  if (max_it != vec.end()) {
+    std::cout << "Max element: " << *max_it << std::endl;
+  } else {
+    std::cout << "Vector is empty." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec1{1, 3, 5, 7};
+  std::vector<int> vec2{2, 4, 6, 8};
+  std::vector<int> dest(8);
+
+  auto it = std::merge(vec1.cbegin(), vec2.cend(), vec2.cbegin(), vec2.cend(),
+                       dest.begin());
+
+  std::for_each(dest.cbegin(), dest.cend(),
+                [](int x) -> void { std::cout << x << ' '; });
+  std::cout << std::endl;
+
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{3, 1, 4, 1, 5, 9, 2, 6, 5, 3};
+  auto [min_it, max_it] =
+      std::minmax_element(vec.begin(), vec.end(), std::less{});
+  if (min_it != vec.end() && max_it != vec.end()) {
+    std::cout << "Min element: " << *min_it << std::endl;
+    std::cout << "Max element: " << *max_it << std::endl;
+  } else {
+    std::cout << "Vector is empty." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+
+int main() {
+  auto [min_val, max_val] = std::minmax({1, 3, 5, 2, 4});
+  std::cout << "Minimum value: " << min_val << std::endl;
+  std::cout << "Maximum value: " << max_val << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec1{1, 2, 3, 4, 5};
+  std::vector<int> vec2{1, 2, 4, 4, 5};
+  auto [it1, it2] = std::mismatch(vec1.begin(), vec1.end(), vec2.begin());
+  if (it1 != vec1.end()) {
+    std::cout << "Mismatch found at position: "
+              << std::distance(vec1.begin(), it1) << std::endl;
+    std::cout << "Mismatch values: " << *it1 << " and " << *it2 << std::endl;
+  } else {
+    std::cout << "All elements match." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <vector>
+
+int main() {
+  std::vector<std::string> src = {"apple", "cherry", "banana", "strawberry",
+                                  "pear"};
+  std::vector<std::string> dest(5);
+  std::move(src.begin(), src.end(), dest.begin());
+  std::cout << "Source: ";
+  for (const auto& str : src) {
+    std::cout << str << ' ';
+  }
+  std::cout << "\nDestination: ";
+  for (const auto& str : dest) {
+    std::cout << str << ' ';
+  }
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  std::move_backward(vec.begin() + 3, vec.begin() + 6, vec.end());
+  for (const auto elem : vec) {
+    std::cout << elem << ' ';
+  }
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3};
+  do {
+    for (const auto elem : vec) {
+      std::cout << elem << ' ';
+    }
+    std::cout << '\n';
+  } while (std::next_permutation(vec.begin(), vec.end()));
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{3, 1, 4, 1, 5, 9, 2, 6, 5, 3};
+  int nth = 4;
+  std::nth_element(vec.begin(), vec.begin() + nth, vec.end());
+  std::cout << "The " << nth << "th element is: " << vec.at(nth) << std::endl;
+  std::sort(vec.begin(), vec.end());
+  for (const auto& val : vec) {
+    std::cout << val << ' ';
+  }
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5};
+  bool result = std::none_of(std::execution::par, vec.cbegin(), vec.cend(),
+                             [](int x) { return x > 10; });
+  std::cout << "Are all elements less than 10? " << (result ? "Yes" : "No")
+            << std::endl;
+  return 0;
+}
+#endif 
+
