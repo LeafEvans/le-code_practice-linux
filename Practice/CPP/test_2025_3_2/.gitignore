@@ -1,0 +1,9 @@
+# CMake cache and settings
+build/
+CMakePresets.json
+
+# MacOS cache files
+.DS_Store
+
+# VSCode settings and cache
+.vscode/

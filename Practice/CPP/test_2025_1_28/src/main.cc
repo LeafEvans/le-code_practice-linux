@@ -2126,5 +2126,416 @@ int main() {
             << std::endl;
   return 0;
 }
-#endif 
+#endif
 
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{3, 1, 4, 1, 5, 9, 2, 6, 5, 3};
+  size_t n = 4;
+  std::partial_sort(vec.begin(), vec.begin() + n, vec.end());
+  for (const auto& val : vec) {
+    std::cout << val << ' ';
+  }
+  std::cout << std::endl;
+  std::sort(vec.begin() + n, vec.end());
+  std::inplace_merge(vec.begin(), vec.begin() + n, vec.end());
+  for (const auto& val : vec) {
+    std::cout << val << ' ';
+  }
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> src{3, 1, 4, 1, 5, 9, 2, 6, 5, 3};
+  std::vector<int> dest(5);
+  auto last =
+      std::partial_sort_copy(src.begin(), src.end(), dest.begin(), dest.end());
+  for (auto it = dest.begin(); it != last; ++it) {
+    std::cout << *it << ' ';
+  }
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  auto it =
+      std::partition(vec.begin(), vec.end(), [](int x) { return x % 2 == 0; });
+  std::cout << "Partitioned vector: ";
+  for (const auto val : vec) {
+    std::cout << val << ' ';
+  }
+  std::cout << std::endl;
+  std::cout << "First odd number is at position: "
+            << std::distance(vec.begin(), it) << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> src{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  std::vector<int> dest_true(9);
+  std::vector<int> dest_false(9);
+  auto [end_true, end_false] =
+      std::partition_copy(src.begin(), src.end(), dest_true.begin(),
+                          dest_false.begin(), [](int x) { return x % 2 == 0; });
+  std::cout << "Elements that satisfy the predicate (even numbers): ";
+  for (auto it = dest_true.begin(); it != end_true; ++it) {
+    std::cout << *it << ' ';
+  }
+  std::cout << "\nElements that don't satisfy the predicate (odd numbers): ";
+  for (auto it = dest_false.begin(); it != end_false; ++it) {
+    std::cout << *it << ' ';
+  }
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{2, 4, 6, 8, 1, 3, 5, 7, 9};
+  auto it = std::partition_point(vec.begin(), vec.end(),
+                                 [](int x) { return x % 2 == 0; });
+  if (it != vec.end()) {
+    std::cout << "First odd number is: " << *it << std::endl
+              << "Position: " << std::distance(vec.begin(), it) << std::endl;
+  } else {
+    std::cout << "All elements are even." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{9, 5, 6, 2, 3};
+  std::make_heap(vec.begin(), vec.end());
+  std::cout << "Initial heap: ";
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl << "After pop_hear: ";
+  std::pop_heap(vec.begin(), vec.end());
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl << "Final heap: ";
+  vec.pop_back();
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{3, 2, 1};
+  do {
+    std::for_each(vec.cbegin(), vec.cend(),
+                  [](int x) { std::cout << x << ' '; });
+    std::cout << std::endl;
+  } while (std::prev_permutation(vec.begin(), vec.end()));
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{9, 5, 6, 2};
+  vec.push_back(8);
+  std::push_heap(vec.begin(), vec.end());
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 2, 4, 2, 5};
+  auto new_end = std::remove(vec.begin(), vec.end(), 2);
+  vec.erase(new_end, vec.end());
+  std::cout << "Vector after remove: ";
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> src{1, 2, 3, 2, 4, 2, 5};
+  std::vector<int> dest(src.size());
+  auto new_end = std::remove_copy(src.begin(), src.end(), dest.begin(), 2);
+  dest.resize(std::distance(dest.begin(), new_end));
+  std::cout << "Source vector: ";
+  std::for_each(src.cbegin(), src.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << "\nDestination vector: ";
+  std::for_each(dest.cbegin(), dest.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> src = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+  std::vector<int> dest(src.size());
+  auto new_end = std::remove_copy_if(src.begin(), src.end(), dest.begin(),
+                                     [](int x) { return x % 2 == 0; });
+  dest.resize(std::distance(dest.begin(), new_end));
+  std::cout << "Source vector: ";
+  std::for_each(src.cbegin(), src.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << "\nDestination vector: ";
+  std::for_each(dest.cbegin(), dest.cend(),
+                [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  auto new_end =
+      std::remove_if(vec.begin(), vec.end(), [](int x) { return x % 2 == 0; });
+  vec.erase(new_end, vec.end());
+  std::cout << "Vector after remove_if: ";
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 2, 4, 2, 5};
+  std::replace(vec.begin(), vec.end(), 2, 10);
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> src{1, 2, 3, 2, 4, 2, 5};
+  std::vector<int> dest(src.size());
+  auto new_end = std::replace_copy(src.begin(), src.end(), dest.begin(), 2, 10);
+  std::cout << "Source vector: ";
+  std::for_each(src.cbegin(), src.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << "\nDestination vector: ";
+  std::for_each(dest.begin(), new_end, [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> src{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  std::vector<int> dest(src.size());
+  auto new_end = std::replace_copy_if(
+      src.begin(), src.end(), dest.begin(), [](int x) { return x % 2 == 0; },
+      0);
+  std::cout << "Source vector:";
+  std::for_each(src.cbegin(), src.cend(), [](int x) { std::cout << x << ' '; });
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  std::replace_if(vec.begin(), vec.end(), [](int x) { return x % 2 == 0; }, 10);
+  std::cout << "Vector after replace_if: ";
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5};
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  std::reverse(std::execution::par, vec.begin(), vec.end());
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> src{1, 2, 3, 4, 5};
+  std::vector<int> dest(5);
+  auto new_end = std::reverse_copy(src.begin(), src.end(), dest.begin());
+  std::cout << "Source vector: ";
+  std::for_each(src.cbegin(), src.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << "\nDestination vector: ";
+  std::for_each(dest.begin(), new_end, [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6, 7};
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  std::rotate(vec.begin(), vec.begin() + 3, vec.end());
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5, 6, 7};
+  std::for_each(vec.cbegin(), vec.cend(), [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> input{1, 2, 3, 4, 5};
+  std::vector<int> output(input.size());
+  std::rotate_copy(std::execution::par, input.begin(), input.begin() + 2,
+                   input.end(), output.begin());
+  std::for_each(output.cbegin(), output.cend(),
+                [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <random>
+#include <vector>
+
+int main() {
+  std::vector<int> population{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  std::vector<int> sample(5);
+  std::mt19937 gen(std::random_device{}());
+  std::sample(population.begin(), population.end(), sample.begin(), 5, gen);
+  std::for_each(sample.cbegin(), sample.cend(),
+                [](int x) { std::cout << x << ' '; });
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v1{1, 2, 3, 4, 5, 6};
+  std::vector<int> v2{3, 4};
+  auto it = std::search(v1.begin(), v1.end(), v2.cbegin(), v2.cend());
+  if (it != v1.end()) {
+    std::cout << "Found at position: " << std::distance(v1.begin(), it)
+              << std::endl;
+  } else {
+    std::cout << "Not found." << std::endl;
+  }
+  return 0;
+}
+#endif
