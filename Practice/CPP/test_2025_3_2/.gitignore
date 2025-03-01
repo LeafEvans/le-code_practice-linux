@@ -1,5 +1,6 @@
 # CMake cache and settings
 build/
+out/
 CMakePresets.json
 
 # MacOS cache files
