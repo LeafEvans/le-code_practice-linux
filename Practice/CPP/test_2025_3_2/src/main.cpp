@@ -221,6 +221,7 @@ int main() {
 }
 #endif
 
+#if false
 #include <algorithm>
 #include <execution>
 #include <iostream>
@@ -234,5 +235,430 @@ int main() {
     std::cout << i << " ";
   }
   std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5};
+  std::vector<int> result;
+  auto last = std::unique_copy(v.begin(), v.end(), std::back_inserter(result));
+  for (const auto& i : result) {
+    std::cout << i << " ";
+  }
+  std::cout << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 4, 4, 5, 6, 7};
+  auto last = std::lower_bound(vec.begin(), vec.end(), 4);
+  std::cout << "Lower bound of 4 is at index: "
+            << std::distance(vec.begin(), last) << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <sstream>
+
+int main() {
+  std::istringstream iss("Hello, World!");
+  std::string str;
+  iss >> str;
+  std::cout << str << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <fstream>
+#include <iostream>
+#include <limits>
+
+int main() {
+  int i;
+  while (std::cin >> i, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    if (std::cin.fail()) {
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "Invalid input. Please try again." << std::endl;
+      continue;
+    }
+    std::cout << "You entered: " << i << std::endl;
+  }
+  std::cout << "End of input." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <limits>
+#include <stdexcept>
+
+int main() {
+  int i;
+  while (std::cin >> i, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    if (std::cin.fail()) {
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "Invalid input. Please try again." << std::endl;
+      continue;
+    }
+    std::cout << "You entered: " << i << std::endl;
+  }
+  std::cout << "End of input." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <limits>
+#include <stdexcept>
+
+int main() {
+  int i;
+  while (std::cin >> i, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    if (std::cin.fail()) {
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "Invalid input. Please try again." << std::endl;
+      continue;
+    }
+    std::cout << "You input: " << i << std::endl;
+  }
+  std::cout << "End of input." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <limits>
+#include <stdexcept>
+
+int main() {
+  int i;
+  while (std::cin >> i, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    if (std::cin.fail()) {
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "Invalid input. Please try again." << std::endl;
+      continue;
+    }
+    std::cout << "You input: " << i << std::endl;
+  }
+  std::cout << "End of input." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <string>
+
+int main() {
+  std::string str;
+  while (std::getline(std::cin, str), !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    std::cout << "You entered: " << str << std::endl;
+  }
+  std::cout << "End of input." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <string>
+
+int main() {
+  char ch;
+  while (std::cin >> ch, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    std::cout << "You entered: " << ch << std::endl;
+  }
+  std::cout << "End of input." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <fstream>
+
+int main() {
+  std::fstream fs;
+  fs.open("test.txt", std::ios::out | std::ios::in);
+  if (fs.is_open()) {
+    fs.close();
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <string>
+
+int main() {
+  std::string file_name;
+  std::string file_content;
+
+  while (std::cin >> file_name, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+
+    std::ifstream ifs(file_name);
+    if (ifs.is_open()) {
+      while (std::getline(ifs, file_content)) {
+        std::cout << file_content << std::endl;
+      }
+      if (ifs.bad()) {
+        throw std::runtime_error("IO stream corrupted.");
+      }
+      ifs.close();
+    } else {
+      ifs.clear();
+      ifs.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "File not found. Please try again." << std::endl;
+      continue;
+    }
+  }
+  std::cout << "File processing completed." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <limits>
+#include <stdexcept>
+
+int main() {
+  int i;
+  while (std::cin >> i, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    if (std::cin.fail()) {
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "Invalid input. Please try again." << std::endl;
+      continue;
+    }
+    std::cout << "You input: " << i << std::endl;
+  }
+  std::cout << "End of input." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <string>
+
+int main() {
+  std::string file_name;
+  std::string file_content;
+  while (std::cin >> file_name, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    std::ifstream ifs(file_name);
+    if (ifs.is_open()) {
+      while (std::getline(ifs, file_content)) {
+        std::cout << file_content << std::endl;
+      }
+      if (ifs.bad()) {
+        throw std::runtime_error("IO stream corrupted.");
+      }
+      ifs.close();
+    } else {
+      ifs.clear();
+      ifs.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "File not found. Please try again." << std::endl;
+      continue;
+    }
+  }
+  std::cout << "File processing completed." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <stdexcept>
+#include <string>
+
+int main() {
+  std::string file_name{};
+  std::string file_content{};
+
+  while (std::cin >> file_name, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    std::ifstream ifs(file_name);
+    if (ifs.is_open()) {
+      while (std::getline(ifs, file_content)) {
+        std::cout << file_content << std::endl;
+      }
+      if (ifs.bad()) {
+        std::runtime_error("IO stream corrupted.");
+      }
+      ifs.close();
+    } else {
+      ifs.clear();
+      ifs.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "File not found. Please try again." << std::endl;
+      continue;
+    }
+  }
+  std::cout << "File processing completed." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <sstream>
+
+int main() {
+  std::istringstream iss;
+  std::ostringstream oss;
+  std::stringstream ss;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <sstream>
+
+int main() {
+  std::string str("Hello, World!");
+  std::istringstream iss(str);
+  iss.str("Hello, C++!");
+  std::cout << iss.str() << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <limits>
+#include <sstream>
+
+int main() {
+  std::string str("12");
+  std::stringstream ss(str);
+  int i = 0;
+  ss >> i;
+  if (ss.bad()) {
+    throw std::runtime_error("String stream corrupted.");
+  }
+  if (ss.fail()) {
+    ss.clear();
+    ss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Invalid input. Please try again." << std::endl;
+  } else {
+    std::cout << "You entered: " << i << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <limits>
+#include <sstream>
+#include <stdexcept>
+
+int main() {
+  std::string str("321");
+  std::stringstream ss(str);
+  int i = 0;
+  ss >> i;
+  if (ss.bad()) {
+    throw std::runtime_error("String stream corrupted.");
+  }
+  if (ss.fail()) {
+    ss.clear();
+    ss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Invalid input. Please try again." << std::endl;
+  }
+  std::cout << "You entered: "  << i << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <sstream>
+
+int main() {
+  int i = 123;
+  std::stringstream ss;
+  ss << i << std::endl;
+  if (ss.bad()) {
+    throw std::runtime_error("String stream corrupted.");
+  } else {
+    std::cout << ss.str();
+  }
+  return 0;
+}
+#endif
+
+#include <iostream>
+#include <sstream>
+
+int main() {
+  int num{32};
+  std::string src{"Hello, World! Hello, World!"};
+  std::string dest{};
+  std::stringstream ss(src);
+  while (ss >> dest) {
+    std::cout << dest << std::endl;
+  }
+  if (ss.bad()) {
+    throw std::runtime_error("String stream corrupted.");
+  }
   return 0;
 }

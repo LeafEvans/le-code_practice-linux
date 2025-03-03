@@ -1,10 +1,12 @@
-# CMake cache and settings
+# Build artifacts and CMake-generated files
 build/
 out/
+
+# Local CMake configuration (personal presets)
 CMakePresets.json
 
-# MacOS cache files
+# macOS system files
 .DS_Store
 
-# VSCode settings and cache
+# VSCode configuration and temporary files
 .vscode/
