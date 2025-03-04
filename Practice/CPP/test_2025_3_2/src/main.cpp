@@ -646,6 +646,7 @@ int main() {
 }
 #endif
 
+#if false
 #include <iostream>
 #include <sstream>
 
@@ -660,5 +661,121 @@ int main() {
   if (ss.bad()) {
     throw std::runtime_error("String stream corrupted.");
   }
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <limits>
+#include <sstream>
+#include <stdexcept>
+
+int main() {
+  int i;
+  while (std::cin >> i, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    if (std::cin.fail()) {
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "Invalid input. Please try again." << std::endl;
+      continue;
+    }
+    std::cout << "You entered: " << i << std::endl;
+  }
+  std::cout << "End of input." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <string>
+
+int main() {
+  std::string file_name{};
+  std::string file_content{};
+  while (std::cin >> file_name, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    if (std::cin.fail()) {
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "Invalid input. Please try again." << std::endl;
+      continue;
+    }
+    std::ifstream ifs{file_name};
+    if (ifs.is_open()) {
+      while (std::getline(ifs, file_content)) {
+        std::cout << file_content << std::endl;
+      }
+      if (ifs.bad()) {
+        throw std::runtime_error("Ifstream corrupted.");
+      }
+      ifs.close();
+    }
+  }
+  std::cout << "File processing completed." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <sstream>
+
+int main() {
+  std::string str{"21"};
+  std::istringstream iss{str};
+  int i{};
+  iss >> i;
+  std::cout << i << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <algorithm>
+#include <iostream>
+#include <list>
+
+static bool Twice(int a, int b) {
+  return a == 2 * b;
+}
+
+int main() {
+  std::list<int> l{50, 40, 10, 20, 20};
+  std::cout << "l = ( ";
+  for (const auto& i : l) {
+    std::cout << i << ' ';
+  }
+  std::cout << ')' << std::endl;
+  auto it = std::adjacent_find(l.begin(), l.end(), Twice);
+  if (it == l.end()) {
+    std::cout << "There are not two adjacent elements that are equal."
+              << std::endl;
+  } else {
+    std::cout << "The first two adjacent elements that are equal are: " << *it
+              << ' ' << *(++it) << std::endl;
+  }
+
+  return 0;
+}
+#endif
+
+#include <iostream>
+#include <thread>
+
+void Test(int value, const int& ref_value, const int* ptr_value) {}
+
+int main() {
+  int value = 10;
+  std::thread t(Test, value, value, &value);
+  t.detach();
   return 0;
 }

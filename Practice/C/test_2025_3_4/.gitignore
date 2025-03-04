@@ -1,0 +1,12 @@
+# Build artifacts and CMake-generated files
+build/
+out/
+
+# Local CMake configuration (personal presets)
+CMakePresets.json
+
+# macOS system files
+.DS_Store
+
+# VSCode configuration and temporary files
+.vscode/
