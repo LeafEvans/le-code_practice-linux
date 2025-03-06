@@ -16,7 +16,7 @@ endif()
 find_package(Boost REQUIRED COMPONENTS filesystem system thread)
 find_package(TBB REQUIRED)
 
-add_executable(test_2025_3_2 src/main.cpp)
+add_executable(test_2025_3_2 src/main.cc)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_options(test_2025_3_2 PRIVATE -g)
