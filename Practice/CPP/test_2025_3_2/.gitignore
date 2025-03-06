@@ -1,12 +1,81 @@
-# Build artifacts and CMake-generated files
+# Ignore compiled files and directories
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.exe
+*.out
+bin/
 build/
 out/
 
-# Local CMake configuration (personal presets)
-CMakePresets.json
+# C++ specific
+*.d
+*.slo
+*.lo
+*.ilk
+*.pdb
+*.idb
 
-# macOS system files
+# Ignore debug and log files
+*.log
+logs/
+debug.log
+
+# Ignore temporary files and caches
+*.tmp
+*.swp
+*.swo
+Thumbs.db
 .DS_Store
 
-# VSCode configuration and temporary files
+# Ignore IDE and editor generated files
 .vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+*.cbp
+.clangd/
+compile_flags.txt
+
+# Ignore documents (consider what you need in version control)
+*.pdf
+*.docx
+*.doc
+*.ppt
+*.pptx
+*.xls
+*.xlsx
+
+# Ignore test and temporary data files
+test_data/
+temp/
+__pycache__/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+CMakePresets.json
+_deps/
+.cmake/
+
+# Dependencies
+vcpkg_installed/
+conan/
+packages/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

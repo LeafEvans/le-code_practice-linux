@@ -1763,5 +1763,232 @@ int main() {
   std::cout << *ptr2 << std::endl;
   return 0;
 }
-#endif 
+#endif
 
+#if false
+#include <iostream>
+#include <memory>
+
+int main() {
+  std::shared_ptr<int> ptr{std::make_shared<int>(100)};
+  std::cout << *ptr << std::endl;
+  std::weak_ptr<int> ptr2{ptr};
+  std::cout << ptr2.use_count() << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <memory>
+
+int main() {
+  std::unique_ptr<int> ptr1{std::make_unique<int>(99)};
+  std::shared_ptr<int> ptr2{std::move(ptr1)};
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <limits>
+
+int main() {
+  int i = 10;
+  while (std::cin >> i, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    if (std::cin.fail()) {
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cerr << "Invalid input. Please try again." << std::endl;
+      continue;
+    }
+    std::cout << "You entered: " << i << std::endl;
+  }
+  std::cout << "End of input." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <string>
+
+int main() {
+  std::string file_name;
+  std::string file_line_content;
+
+  while (std::cin >> file_name, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    std::ifstream ifs(file_name);
+    if (ifs.is_open()) {
+      while (std::getline(ifs, file_line_content)) {
+        std::cout << file_line_content << std::endl;
+      }
+      if (ifs.bad()) {
+        throw std::runtime_error("IO stream corrupted.");
+      }
+      ifs.close();
+    } else {
+      ifs.close();
+      ifs.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cerr << "File not found. Please try again." << std::endl;
+      continue;
+    }
+  }
+  std::cout << "File processing completed." << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <sstream>
+
+int main() {
+  std::string str{"12"};
+  std::istringstream iss(str);
+  int i{0};
+  iss >> i;
+  if (iss.bad()) {
+    throw std::runtime_error("String stream corrupted.");
+  }
+  if (iss.fail()) {
+    iss.clear();
+    iss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cerr << "Invalid input. Please try again." << std::endl;
+  } else {
+    std::cout << "You entered: " << i << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <thread>
+
+void Test() {
+  std::cout << "Child thread: " << std::this_thread::get_id() << std::endl;
+}
+
+int main() {
+  std::thread t{Test};
+  std::cout << "Main thread: " << std::this_thread::get_id() << std::endl;
+  t.join();
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <string>
+#include <thread>
+
+void Test(int val, std::string& str, int* ptr) {
+  std::cout << val << std::endl;
+  std::cout << str << std::endl;
+  std::cout << *ptr << std::endl;
+}
+
+int main() {
+  int val{10};
+  std::string str{"Hello, World!"};
+  std::thread t(Test, val, std::ref(str), &val);
+  t.join();
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <string>
+
+double Divide(double divisior, double dividend) {
+  if (dividend == 0) {
+    throw std::runtime_error("Dividend cannot be zero.");
+  }
+  return divisior / dividend;
+}
+
+void InputNum(const std::string& str, double& num) {
+  std::cout << str << std::endl;
+  while (std::cin >> num, !std::cin.eof()) {
+    if (std::cin.bad()) {
+      throw std::runtime_error("IO stream corrupted.");
+    }
+    if (std::cin.fail()) {
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cerr << "Invalid input. Please try again." << std::endl;
+      continue;
+    }
+    break;
+  }
+}
+#endif
+
+#if false
+#include <fstream>
+#include <iostream>
+
+int main() {
+  try {
+    while (true) {
+      int* ptr{new int[1000]{}};
+    }
+  } catch (const std::bad_alloc& e) {
+    std::cerr << e.what() << std::endl;
+  } catch (...) {
+    std::cerr << "Unknown exception." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <stdexcept>
+#include <vector>
+
+int main() {
+  std::vector<int> vec{1, 2, 3, 4, 5};
+  try {
+    vec.at(10);
+  } catch (const std::out_of_range& e) {
+    std::cerr << e.what() << std::endl;
+  } catch (...) {
+    std::cerr << "Unknown exception." << std::endl;
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+
+class MyClass {
+ public:
+  int value;
+
+  MyClass(int v) : value(v) {}
+
+  operator int() const {
+    std::cout << "Converting to int" << std::endl;
+    return value;
+  }
+};
+
+int main() {
+  MyClass obj(100);
+  int num = obj;
+  std::cout << num << std::endl;
+  return 0;
+}
+#endif 
