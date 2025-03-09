@@ -1,34 +1,20 @@
 using System;
+using System.Text.RegularExpressions;
 
-public class Fahrenheit
+namespace RegExApplication
 {
-    public double Degrees { get; set; }
-
-    public Fahrenheit(double degrees)
+    class Program
     {
-        Degrees = degrees;
-    }
-
-    public static implicit operator double(Fahrenheit f)
-    {
-        return f.Degrees;
-    }
-
-    public static explicit operator Fahrenheit(double d)
-    {
-        return new Fahrenheit(d);
-    }
-}
-
-public class Program
-{
-    public static void Main()
-    {
-        Fahrenheit f = new Fahrenheit(100);
-        Console.WriteLine("Fahrenheit: " + f.Degrees + " degrees");
-        double temp = f;
-        Console.WriteLine("After implicit conversion: " + temp + " degrees");
-        Fahrenheit f2 = (Fahrenheit)temp;
-        Console.WriteLine("After explicit conversion: " + f2.Degrees + " degrees");
+        static void Main(string[] args)
+        {
+            string input = "Hello   World   ";
+            string pattern = @"\s+";
+            string replacement = " ";
+            Regex rgx = new(pattern);
+            string result = rgx.Replace(input, replacement);
+            Console.WriteLine($"Original String: {input}");
+            Console.WriteLine($"Replacement String: {result}");
+            Console.ReadKey();
+        }
     }
 }

@@ -1308,12 +1308,12 @@ int main() {
 #endif
 
 #if false
-#include <boost/type_index.hpp>
 #include <iostream>
+#include <std/type_index.hpp>
 
 int main() {
   auto i = 100;
-  std::cout << boost::typeindex::type_id_with_cvr<decltype(i)>() << std::endl;
+  std::cout << std::typeindex::type_id_with_cvr<decltype(i)>() << std::endl;
   return 0;
 }
 #endif
@@ -1326,39 +1326,39 @@ auto Add(T t, U u) -> decltype(t + u) {
 #endif
 
 #if false
-#include <boost/type_index.hpp>
 #include <iostream>
+#include <std/type_index.hpp>
 
 int main() {
   auto i = 100;
   auto& i2 = i;
-  std::cout << boost::typeindex::type_id_with_cvr<decltype(i2)>() << std::endl;
+  std::cout << std::typeindex::type_id_with_cvr<decltype(i2)>() << std::endl;
   return 0;
 }
 #endif
 
 #if false
-#include <boost/type_index.hpp>
 #include <iostream>
+#include <std/type_index.hpp>
 
 int main() {
   auto i = 100;
   const auto& ref_i = i;
   auto i2 = ref_i;
-  std::cout << boost::typeindex::type_id_with_cvr<decltype(i2)>() << std::endl;
+  std::cout << std::typeindex::type_id_with_cvr<decltype(i2)>() << std::endl;
   return 0;
 }
 #endif
 
 #if false
-#include <boost/type_index.hpp>
 #include <iostream>
+#include <std/type_index.hpp>
 
 int main() {
   int i = 100;
   const int* const ptr = &i;
   auto& ptr2 = ptr;
-  std::cout << boost::typeindex::type_id_with_cvr<decltype(ptr2)>()
+  std::cout << std::typeindex::type_id_with_cvr<decltype(ptr2)>()
             << std::endl;
   return 0;
 }
@@ -1989,6 +1989,64 @@ int main() {
   MyClass obj(100);
   int num = obj;
   std::cout << num << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <regex>
+#include <vector>
+
+int main() {
+  std::string pattern = R"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)";
+  std::regex reg(pattern);
+  std::string text = "Contact: *** and user2@example.co.uk";
+
+  std::smatch matches;
+  std::string::const_iterator searchStart(text.cbegin());
+
+  while (std::regex_search(searchStart, text.cend(), matches, reg)) {
+    std::cout << "Found email: " << matches[0] << std::endl;
+    searchStart = matches.suffix().first;
+  }
+
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <regex>
+
+int main() {
+  std::regex pattern(R"(\b\w+\b)");
+  std::string text = "Hello std.Regex!";
+  std::sregex_iterator it(text.begin(), text.end(), pattern);
+  std::sregex_iterator end;
+
+  for (; it != end; ++it) {
+    std::cout << "匹配到: " << it->str() << std::endl;
+  }
+}
+#endif
+
+#if false
+#include <iostream>
+#include <regex>
+
+int main() {
+  std::string text = "2023-10-05";
+  std::regex pattern(R"((\d{4})-(\d{2})-(\d{2}))");
+  std::smatch matches;
+
+  if (std::regex_match(text, matches, pattern)) {
+    std::cout << "Matched: " << matches[0] << std::endl;
+    std::cout << "Year: " << matches[1] << std::endl;
+    std::cout << "Month: " << matches[2] << std::endl;
+    std::cout << "Day: " << matches[3] << std::endl;
+  }
+
   return 0;
 }
 #endif 
