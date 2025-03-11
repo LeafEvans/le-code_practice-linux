@@ -11299,10 +11299,118 @@ int main() {
 }
 #endif
 
-#include <print>
+#if false
+#include <cstring>
+
+class Test {
+ public:
+  Test() = default;
+
+  Test(const Test& test) {
+    if (test.str_) {
+      str_ = new char[std::strlen(test.str_) + 1];
+      std::strcpy(str_, test.str_);
+    } else {
+      str_ = nullptr;
+    }
+  }
+
+  Test(Test&& test) {
+    if (test.str_) {
+      str_ = test.str_;
+      test.str_ = nullptr;
+    } else {
+      str_ = nullptr;
+    }
+  }
+
+  Test& operator=(const Test& test) {
+    if (this != &test) {
+      delete[] str_;
+      str_ = nullptr;
+      if (test.str_) {
+        str_ = new char[std::strlen(test.str_) + 1];
+        std::strcpy(str_, test.str_);
+      }
+    }
+    return *this;
+  }
+
+  Test& operator=(Test&& test) {
+    if (this != &test) {
+      delete[] str_;
+      str_ = nullptr;
+      if (test.str_) {
+        str_ = test.str_;
+        test.str_ = nullptr;
+      }
+    }
+    return *this;
+  }
+
+ private:
+  char* str_;
+};
+#endif
+
+#if false
+#include <iostream>
+#include <unordered_map>
+#include <unordered_set>
 
 int main() {
-  int* ptr = reinterpret_cast<int*>(100);
-  std::print("{}", *ptr);
+  std::unordered_map<int, std::string> umap;
+  umap.emplace(1, "one");
+  umap.emplace(2, "two");
+  umap.emplace(3, "three");
+  for (const auto& pair : umap) {
+    std::cout << pair.first << " -> " << pair.second << std::endl;
+  }
+  std::unordered_multimap<int, std::string>
+}
+#endif
+
+#if false
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> v1, v2, v3;
+  v1.push_back(10);
+  v1.push_back(20);
+  v1.push_back(30);
+  v1.push_back(40);
+  v1.push_back(50);
+
+  std::cout << "v1 = ";
+  for (const auto& v : v1) {
+    std::cout << v << ' ';
+  }
+  std::cout << std::endl;
+
+  v2.assign(v1.begin(), v1.end());
+  std::cout << "v2 = ";
+  for (const auto& v : v2) {
+    std::cout << v << ' ';
+  }
+  std::cout << std::endl;
+
+  v3.assign(7, 4);
+  std::cout << "v3 = ";
+  for (const auto& v : v3) {
+    std::cout << v << ' ';
+  }
+  std::cout << std::endl;
+
+  v3.assign({5, 6, 7});
+  std::cout << "v3 = ";
+  for (const auto& v : v3) {
+    std::cout << v << ' ';
+  }
+  std::cout << std::endl;
+
   return 0;
 }
+#endif 
+
+

@@ -30,7 +30,7 @@ MyArray<T>::MyArray(const std::initializer_list<T>& arr_init)
     unsigned i = 0;
     if (std::is_pointer_v<T>) {
       for (const auto& elem : arr_init) {
-        data_[i++] = new std::remove_pointer_t<T>{*elem};
+        data_[i++] = new std::remove_pointer_t<T>(*elem);
       }
     } else {
       for (const auto& elem : arr_init) {
