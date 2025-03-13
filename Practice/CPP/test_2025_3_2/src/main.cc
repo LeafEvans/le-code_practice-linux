@@ -11411,6 +11411,259 @@ int main() {
 
   return 0;
 }
-#endif 
+#endif
 
+#if false
+#include <cstdlib>
+#include <iostream>
+#include <vector>
+
+std::vector<int*> g_vec;
+
+int Test() {
+  int* ptr = new int(rand());
+  g_vec.push_back(ptr);
+  static unsigned func_call_count{0};
+  return ++func_call_count;
+}
+
+int main() {
+  Test();
+  Test();
+  Test();
+  unsigned test_count = Test();
+  std::print("{}\n", test_count);
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <string>
+
+int main() {
+  auto str_ptr = new std::string("Hello, World!");
+  std::cout << *str_ptr << std::endl;
+  auto arr = new int[100]{};
+  std::cout << arr[20] << std::endl;
+  delete[] arr;
+  delete str_ptr;
+  return 0;
+}
+#endif
+
+#if false
+#include <boost/type_index.hpp>
+#include <iostream>
+
+int main() {
+  auto num = 100;
+  const int& num_ref = num;
+  auto num2 = num_ref;
+  std::cout << boost::typeindex::type_id_with_cvr<decltype(num2)>()
+            << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <functional>
+#include <iostream>
+
+void Test(std::function<void(int)> func, int num) {
+  func(num);
+}
+
+int main() {
+  int num{10};
+  Test([](int num) -> void { std::cout << "num = " << num << std::endl; }, 100);
+  return 0;
+}
+#endif
+
+#if false
+#include <boost/type_index.hpp>
+#include <iostream>
+
+template <typename Container>
+auto GetValue(Container& container) -> decltype(container.front()) {
+  return container.front();
+}
+
+template <typename T, typename U>
+auto Add(T t, U u) -> decltype(t + u) {
+  return t + u;
+}
+
+int main() {
+  auto lambda = [](int x) {
+    return x * 2;
+  };
+  decltype(lambda) lambda2 = lambda;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+
+class Test {
+ public:
+  Test() : output_call_count_{0} {}
+
+  void Output() const {
+    std::cout << "Output called." << std::endl;
+    ++output_call_count_;
+  }
+
+  unsigned output_call_count() const { return output_call_count_; }
+
+ private:
+  mutable unsigned output_call_count_;
+};
+
+int main() {
+  Test test;
+  test.Output();
+  test.Output();
+  test.Output();
+  std::cout << "Output call count: " << test.output_call_count() << std::endl;
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <string>
+
+class Test {
+ public:
+  friend void Output(const Test&);
+  Test(std::string name, unsigned age) : name_{name}, age_{age} {}
+  Test() = default;
+  Test(const Test&) = default;
+  Test& operator=(const Test&) = default;
+  ~Test() = default;
+
+ private:
+  std::string name_;
+  unsigned age_;
+};
+
+void Output(const Test& test) {
+  std::cout << test.name_ << ", " << test.age_ << std::endl;
+}
+
+int main() {
+  Test test{"Alice", 25};
+  Output(test);
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+#include <string>
+
+class Spear {
+ public:
+  Spear(const std::string& name, const std::string& icon)
+      : name_{name}, icon_{icon} {
+    std::cout << "Spear" << std::endl;
+  }
+  virtual ~Spear() = default;
+  virtual void OpenFire() const { std::cout << "Open fire." << std::endl; }
+
+ private:
+  std::string name_;
+  std::string icon_;
+};
+
+class FireSpear : public Spear {
+ public:
+  FireSpear(const std::string& name, const std::string& icon, int fire)
+      : Spear{name, icon}, fire_{fire} {
+    std::cout << "FireSpear" << std::endl;
+  }
+  virtual ~FireSpear() = default;
+  virtual void OpenFire() const override {
+    std::cout << "Open fire with fire power: " << fire_ << std::endl;
+  }
+
+ private:
+  int fire_;
+};
+
+class IceSpear : public Spear {
+ public:
+  IceSpear(const std::string& name, const std::string& icon, int ice)
+      : Spear{name, icon}, ice_{ice} {
+    std::cout << "IceSpear" << std::endl;
+  }
+  virtual ~IceSpear() = default;
+  virtual void OpenFire() const override {
+    std::cout << "Open fire with ice power: " << ice_ << std::endl;
+  }
+
+ private:
+  int ice_;
+};
+
+void OpenFire(const Spear& spear) {
+  spear.OpenFire();
+}
+
+int main() {
+  Spear* spear_ptr = new FireSpear{"Fire Spear", "Fire", 100};
+  std::string type_name = typeid(*spear_ptr).name();
+  if (type_name == "class FireSpear" || "9FireSpear") {
+    FireSpear* fire_spear_ptr = dynamic_cast<FireSpear*>(spear_ptr);
+    if (fire_spear_ptr) {
+      fire_spear_ptr->OpenFire();
+    }
+  }
+  return 0;
+}
+#endif
+
+#if false
+#include <iostream>
+
+class Base {
+ public:
+  virtual ~Base() = default;
+};
+
+class Derived : public Base {};
+
+int main() {
+  Base* basePtr = new Derived();
+  Derived* derivedPtr = dynamic_cast<Derived*>(basePtr);
+
+  if (derivedPtr) {
+    std::cout << "Conversion successful!" << std::endl;
+  } else {
+    std::cout << "Conversion failed!" << std::endl;
+  }
+
+  delete basePtr;
+  return 0;
+}
+#endif
+
+#if false
+// 基本数据类型转换
+int a = 10;
+double b = static_cast<double>(a);
+
+// 类层次结构中的向上转换
+class Base {};
+class Derived : public Base {};
+
+int main() {
+  Derived derivedObj;
+  Base* basePtr = static_cast<Base*>(&derivedObj);
+  return 0;
+}
+#endif 
 
