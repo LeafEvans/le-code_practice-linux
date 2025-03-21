@@ -1,5 +1,0 @@
-cmake_minimum_required(VERSION 3.10.0)
-project(test_2025_3_20 VERSION 0.1.0 LANGUAGES C CXX)
-
-add_executable(test_2025_3_20 main.cpp)
-
