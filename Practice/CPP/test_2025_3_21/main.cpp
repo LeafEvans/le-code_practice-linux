@@ -2,13 +2,17 @@
 
 #include <boost/type_index.hpp>
 
-int Add(int a, int b) {
-  return a + b;
+const int kNum = 19;
+
+namespace {
+int Add(int num1, int num2) {
+  return num1 + num2;
 }
+}  // namespace
 
 int main() {
-  int i = 10;
-  for (int i = 0; i < 10; ++i) {
+  int num = kNum;
+  for (int i = 0; i < kNum; ++i) {
     std::cout << i << ' ';
   }
   std::cout << Add(1, 2) << std::endl;

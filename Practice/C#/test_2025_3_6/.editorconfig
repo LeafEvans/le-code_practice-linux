@@ -1,6 +1,3 @@
-# Google C# Style Guide .editorconfig
-# Based on https://google.github.io/styleguide/csharp-style.html
-
 root = true
 
 [*]
