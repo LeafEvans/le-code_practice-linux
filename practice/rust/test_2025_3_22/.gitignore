@@ -1,0 +1,39 @@
+# Rust compiled output directory
+/target/
+
+# Remove Cargo.lock for library crates
+# For binary crates, commit it to version control
+# Cargo.lock
+
+# Backup files
+**/*.rs.bk
+
+# Local configuration files
+.cargo/config.toml
+
+# IDE and editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+*.iml
+*.swp
+*.swo
+.DS_Store
+
+# Rustfmt backup files
+**/*.rs.fmt
+
+# Performance analysis files
+flamegraph.svg
+perf.data
+perf.data.old
+
+# Benchmark output
+criterion/
+
+# Test coverage reports
+tarpaulin-report.html
+cobertura.xml

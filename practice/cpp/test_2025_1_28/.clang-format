@@ -1,61 +1,74 @@
+---
 Language: Cpp
 BasedOnStyle: Google
-AccessModifierOffset: -1
+AccessModifierOffset: -2
+IndentWidth: 4
+TabWidth: 4
+ContinuationIndentWidth: 4
+IndentCaseLabels: true
+IndentPPDirectives: None
+UseTab: Never
+
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: None
+AlignConsecutiveDeclarations: None
 AlignOperands: Align
+AlignTrailingComments: true
+
+BreakBeforeBraces: Attach
+
 AllowAllArgumentsOnNextLine: true
 AllowAllConstructorInitializersOnNextLine: true
 AllowAllParametersOfDeclarationOnNextLine: false
+BinPackArguments: true
+ColumnLimit: 100
+
 AllowShortBlocksOnASingleLine: Empty
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: Inline
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLambdasOnASingleLine: Inline
 AllowShortLoopsOnASingleLine: false
+
 AlwaysBreakAfterReturnType: None
 AlwaysBreakTemplateDeclarations: Yes
-BinPackArguments: true
-BreakBeforeBraces: Custom
-BraceWrapping:
-  AfterCaseLabel: false
-  AfterClass: false
-  AfterStruct: false
-  AfterControlStatement: Never
-  AfterEnum: false
-  AfterFunction: false
-  AfterNamespace: false
-  AfterUnion: false
-  AfterExternBlock: false
-  BeforeCatch: false
-  BeforeElse: false
-  BeforeLambdaBody: false
-  IndentBraces: false
-  SplitEmptyFunction: false
-  SplitEmptyRecord: false
-  SplitEmptyNamespace: false
 BreakBeforeBinaryOperators: None
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeColon
 BreakInheritanceList: BeforeColon
-ColumnLimit: 80
-CompactNamespaces: false
-ContinuationIndentWidth: 4
-Cpp11BracedListStyle: true
-DerivePointerAlignment: false
+
 EmptyLineBeforeAccessModifier: LogicalBlock
-FixNamespaceComments: true
-IncludeBlocks: Preserve
-IndentCaseLabels: true
-IndentPPDirectives: None
-IndentWidth: 2
 KeepEmptyLinesAtTheStartOfBlocks: true
 MaxEmptyLinesToKeep: 1
-NamespaceIndentation: None
-ObjCSpaceAfterProperty: false
-ObjCSpaceBeforeProtocolList: true
+
+CompactNamespaces: false
+FixNamespaceComments: false
+NamespaceIndentation: All
+
+IncludeBlocks: Preserve
+SeparateDefinitionBlocks: Always
+IncludeCategories:
+  - Regex: '^"(.*\.h)"$'
+    Priority: 1
+  - Regex: '^<(.*\/)*.*\.h>$'
+    Priority: 2
+  - Regex: "^<.*>$"
+    Priority: 3
+  - Regex: '^<.*\..*>$'
+    Priority: 4
+  - Regex: '^".*"$'
+    Priority: 5
+SortIncludes: CaseSensitive
+
+Cpp11BracedListStyle: false
+Standard: c++20
+
+DerivePointerAlignment: false
 PointerAlignment: Left
-ReflowComments: false
+
+ReflowComments: true
+SpacesBeforeTrailingComments: 1
+
 SpaceAfterCStyleCast: false
 SpaceAfterLogicalNot: false
 SpaceAfterTemplateKeyword: true
@@ -67,12 +80,11 @@ SpaceBeforeParens: ControlStatements
 SpaceBeforeRangeBasedForLoopColon: true
 SpaceBeforeSquareBrackets: false
 SpaceInEmptyParentheses: false
-SpacesBeforeTrailingComments: 2
 SpacesInAngles: false
 SpacesInCStyleCastParentheses: false
 SpacesInContainerLiterals: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
-Standard: c++11
-TabWidth: 4
-UseTab: Never
+
+ObjCSpaceAfterProperty: false
+ObjCSpaceBeforeProtocolList: true
