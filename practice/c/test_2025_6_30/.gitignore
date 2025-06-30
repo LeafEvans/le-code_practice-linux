@@ -1,11 +1,165 @@
-# Xmake cache
-.xmake/
-build/
+# Build directories and outputs
+build*/
+out/
+bin/
+lib/
+dist/
+.cache/
+install/
+Testing/
 
-# MacOS Cache
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+CMakeTmp/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+.cmake/
+CMakeUserPresets.json
+CMakePresets.json
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.ko
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.so.*
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+*.lo
+
+# Executables
+*.exe
+*.out
+*.app
+a.out
+
+# IDE specific files
+## Visual Studio / Visual Studio Code
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+ipch/
+*.aps
+*.vsix
+*.vspscc
+*.vssscc
+.builds
+
+## CLion / JetBrains
+.idea/
+cmake-build-*/
+*.iws
+*.iml
+*.ipr
+.idea_modules/
+
+## Other editors
+*~
+*.swp
+*.swo
+.*.sw?
+Session.vim
+.netrwhist
+tags
+cscope.*
+.clangd/
+.cache/clangd/
+.vimrc.lua
+.ccls-cache/
+
+# Platform specific
+## macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
 
-# VS Code specific files
-.vscode/compile_commands.json
+## Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 
+## Linux
+.directory
+.Trash-*
 
+# Debug and profiling
+*.dSYM/
+*.su
+*.idb
+*.pdb
+callgrind.out.*
+perf.data*
+*.gcda
+*.gcno
+*.gcov
+gmon.out
+massif.out.*
+
+# Package managers and dependencies
+vcpkg_installed/
+conan/
+packages/
+.deps/
+deps/
+node_modules/
+package-lock.json
+
+# Generated files
+**/generated/
+**/gen/
+**/build-*/
+**/moc_*.cpp
+**/qrc_*.cpp
+**/ui_*.h
+version.h
+revision.h
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# Utility files
+compile_flags.txt
+.dir-locals.el
+.clang-format
+.clang-tidy
+compile_commands.json
+.ycm_extra_conf.py
+*.profraw
+.cproject
+.project

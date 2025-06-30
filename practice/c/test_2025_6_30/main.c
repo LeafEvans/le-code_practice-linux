@@ -3,8 +3,8 @@
 int main(void) {
     for (int i = 0; i < 10; ++i) {
         printf("%d ", i);
+        fflush(stdout);
     }
-    printf("Hello World!");
     putchar('\n');
     return 0;
 }
