@@ -1,0 +1,90 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+AccessModifierOffset: -2
+IndentWidth: 4
+TabWidth: 4
+ContinuationIndentWidth: 4
+IndentCaseLabels: true
+IndentPPDirectives: None
+UseTab: Never
+
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: None
+AlignConsecutiveDeclarations: None
+AlignOperands: Align
+AlignTrailingComments: true
+
+BreakBeforeBraces: Attach
+
+AllowAllArgumentsOnNextLine: true
+AllowAllConstructorInitializersOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackArguments: true
+ColumnLimit: 100
+
+AllowShortBlocksOnASingleLine: Empty
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Inline
+AllowShortLoopsOnASingleLine: false
+
+AlwaysBreakAfterReturnType: None
+AlwaysBreakTemplateDeclarations: Yes
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeColon
+BreakInheritanceList: BeforeColon
+
+EmptyLineBeforeAccessModifier: LogicalBlock
+KeepEmptyLinesAtTheStartOfBlocks: true
+MaxEmptyLinesToKeep: 1
+
+CompactNamespaces: false
+FixNamespaceComments: false
+NamespaceIndentation: All
+
+IncludeBlocks: Preserve
+SeparateDefinitionBlocks: Always
+IncludeCategories:
+  - Regex: '^"(.*\.h)"$'
+    Priority: 1
+  - Regex: '^<(.*\/)*.*\.h>$'
+    Priority: 2
+  - Regex: "^<.*>$"
+    Priority: 3
+  - Regex: '^<.*\..*>$'
+    Priority: 4
+  - Regex: '^".*"$'
+    Priority: 5
+SortIncludes: CaseSensitive
+
+Cpp11BracedListStyle: false
+Standard: c++20
+
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+ReflowComments: true
+SpacesBeforeTrailingComments: 1
+
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyParentheses: false
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+ObjCSpaceAfterProperty: false
+ObjCSpaceBeforeProtocolList: true
