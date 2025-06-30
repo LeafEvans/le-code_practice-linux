@@ -7,3 +7,6 @@ build/
 
 # VSCode cache
 .vscode/.cache
+
+# VS Code specific files
+.vscode/compile_commands.json
