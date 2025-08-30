@@ -19,13 +19,13 @@
 ### 📥 克隆仓库
 
 ```bash
-git clone https://github.com/LeafEvans/LE-Code_Practice-Linux.git
+git clone https://github.com/LeafEvans/le-code_practice-linux.git
 ```
 
 ### 📂 进入指定目录
 
 ```bash
-cd LE-Code_Practice-Linux
+cd le-code_practice-linux
 ```
 
 ### ▶️ 运行代码
